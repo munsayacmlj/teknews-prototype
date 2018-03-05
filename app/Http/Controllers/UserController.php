@@ -57,14 +57,14 @@ class UserController extends Controller
         $profile->userDetail->bio = $request->bio;
 
         if ($request->delete_image) {
-            $image_path = public_path() . '\\storage\\upload\\user_avatar\\' . $profile->userDetail->avatar;
+            $image_path = storage_path() . '\\storage\\upload\\user_avatar\\' . $profile->userDetail->avatar;
             unlink($image_path);
             $profile->userDetail->avatar = "";
         }
 
         if ($request->hasFile('avatar')) {
             if (!empty($profile->userDetail->avatar)) {
-                $image_path = public_path() . '\\storage\\upload\\user_avatar\\' . $profile->userDetail->avatar;
+                $image_path = storage_path() . '\\storage\\upload\\user_avatar\\' . $profile->userDetail->avatar;
                 unlink($image_path);
             }
 

@@ -109,14 +109,14 @@ class PostController extends Controller
         $post->topic_id = $request->topic;
 
         if ($request->delete_image) {
-            $image_path = public_path() . '\\storage\\upload\\post\\' . $post->image;
+            $image_path = storage_path() . '\\storage\\upload\\post\\' . $post->image;
             unlink($image_path);
             $post->image = "";
         }
         
         if ($request->hasFile('image')) {
             if (!empty($post->image)) {
-                $image_path = public_path() . '\\storage\\upload\\post\\' . $post->image;
+                $image_path = storage_path() . '\\storage\\upload\\post\\' . $post->image;
                 unlink($image_path);
             }
             
