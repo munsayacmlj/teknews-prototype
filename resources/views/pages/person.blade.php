@@ -77,16 +77,16 @@
 		<div id="user-activity" class="tab-pane fade show active">
 			<div class="grid2">
 				
-			
+			{{-- List of Activies by a user --}}
 			@foreach($activities->reverse() as $activity)
 			@if(isset($activity->subject))
 			{{-- <div class="activity-list row py-2"> --}}
 			<div class="activity-list grid-sizer2 grid-item--width2 clearfix pt-3 mb-3">
 					<div class="first-column px-1">
-						{{-- <p>{{ $activity->subject }}</p> --}}
+						
 						@if ($activity->subject_type == "App\Comment")
 						<p>
-							<a href="#">{{ $activity->causer->name }}</a> commented to
+							<a href="/people/{{ str_replace(" ", "-", strtolower($activity->causer->name)) }}">{{ $activity->causer->name }}</a> commented to
 							@if($activity->subject->post['user']['name'] == $profile->name)
 								@if($profile->userDetail->gender == 'Male')
 								his
@@ -95,13 +95,13 @@
 								@endif
 								own
 							@else
-							<a href="{{ $activity->subject->post['user']['name'] }}">{{ $activity->subject->post['user']['name'] }}</a>'s
+							<a href="/people/{{ str_replace(" ","-",strtolower( $activity->subject->post['user']['name'] )) }}">{{ $activity->subject->post['user']['name'] }}</a>'s
 							@endif 
 							<a href="/posts/{{ $activity->subject->post['id'] }}#{{ $activity->subject->id }}">post.</a>
 						</p>
 						@elseif($activity->subject_type == "App\Post")
 						<p>
-							<a href="#">
+							<a href="/people/{{ str_replace(" ", "-", strtolower($activity->causer->name)) }}">
 								{{ $activity->causer->name }}
 							</a>
 							posted in
@@ -109,7 +109,9 @@
 						</p>
 						@endif
 					</div> {{-- first-column --}}
+					
 
+					{{-- second-column --}}
 					<div class="second-column px-1">
 						@if($activity->subject_type == "App\Comment")
 						<div class="pb-2">
@@ -144,7 +146,7 @@
 						</div>
 						
 						@elseif($activity->subject_type == "App\Post")	
-							<a href="#">
+							<a href="/posts/{{ $activity->subject->post['id'] }}">
 								<div>
 									<p>
 										<span class="h6">{{ $activity->subject->title }}</span>

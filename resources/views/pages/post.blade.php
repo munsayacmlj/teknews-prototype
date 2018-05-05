@@ -61,8 +61,13 @@
 							@foreach ($post->comments as $comment)
 								<div class="comment mx-3 pt-2" id="{{ $comment->id }}">
 									<span class="commenter">
-										<a href='/people/{{ $user }}' class="h6">
-											<img src='{{ asset("storage/upload/user_avatar/".$comment->user->userDetail->avatar) }}'> {{ $comment->user->name }}
+										<a href='/people/{{ $comment->user->name }}' class="h6">
+											<img src='
+											@if (empty($comment->user->userDetail->avatar))
+												{{ asset("images/default.png") }}
+											@else
+											{{ asset("storage/upload/user_avatar/".$comment->user->userDetail->avatar) }}@endif'
+											> {{ $comment->user->name }}
 										</a> said on {{ $comment->created_at->toFormattedDateString() }}, {{ $comment->created_at->setTimezone(Auth::user()->timezone)->format('g:i A') }}
 									</span>
 									

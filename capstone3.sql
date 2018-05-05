@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2018 at 05:52 PM
+-- Generation Time: May 05, 2018 at 05:57 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -75,7 +75,19 @@ INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_id`, `subj
 (31, 'default', 'created', 15, 'App\\Post', 3, 'App\\User', '{\"attributes\":{\"topic_id\":6}}', '2018-03-03 15:28:00', '2018-03-03 15:28:00'),
 (32, 'default', 'created', 16, 'App\\Post', 1, 'App\\User', '{\"attributes\":{\"topic_id\":14}}', '2018-03-03 15:29:49', '2018-03-03 15:29:49'),
 (33, 'default', 'created', 17, 'App\\Post', 1, 'App\\User', '{\"attributes\":{\"topic_id\":2}}', '2018-03-03 15:31:57', '2018-03-03 15:31:57'),
-(34, 'default', 'created', 18, 'App\\Post', 1, 'App\\User', '{\"attributes\":{\"topic_id\":14}}', '2018-03-03 15:33:02', '2018-03-03 15:33:02');
+(34, 'default', 'created', 18, 'App\\Post', 1, 'App\\User', '{\"attributes\":{\"topic_id\":14}}', '2018-03-03 15:33:02', '2018-03-03 15:33:02'),
+(35, 'default', 'created', 34, 'App\\Comment', 1, 'App\\User', '{\"attributes\":{\"post_id\":18}}', '2018-03-05 04:41:55', '2018-03-05 04:41:55'),
+(36, 'default', 'deleted', 34, 'App\\Comment', 1, 'App\\User', '{\"attributes\":{\"post_id\":18}}', '2018-03-05 04:43:18', '2018-03-05 04:43:18'),
+(37, 'default', 'created', 35, 'App\\Comment', 1, 'App\\User', '{\"attributes\":{\"post_id\":18}}', '2018-03-05 04:43:27', '2018-03-05 04:43:27'),
+(38, 'default', 'created', 36, 'App\\Comment', 1, 'App\\User', '{\"attributes\":{\"post_id\":15}}', '2018-03-05 04:55:20', '2018-03-05 04:55:20'),
+(39, 'default', 'created', 19, 'App\\Post', 2, 'App\\User', '{\"attributes\":{\"topic_id\":6}}', '2018-03-05 05:02:16', '2018-03-05 05:02:16'),
+(40, 'default', 'deleted', 19, 'App\\Post', 2, 'App\\User', '{\"attributes\":{\"topic_id\":6}}', '2018-03-05 05:08:44', '2018-03-05 05:08:44'),
+(41, 'default', 'created', 20, 'App\\Post', 2, 'App\\User', '{\"attributes\":{\"topic_id\":6}}', '2018-03-05 05:09:07', '2018-03-05 05:09:07'),
+(42, 'default', 'created', 37, 'App\\Comment', 3, 'App\\User', '{\"attributes\":{\"post_id\":18}}', '2018-03-05 06:43:00', '2018-03-05 06:43:00'),
+(43, 'default', 'deleted', 11, 'App\\Post', 3, 'App\\User', '{\"attributes\":{\"topic_id\":3}}', '2018-03-05 06:49:42', '2018-03-05 06:49:42'),
+(44, 'default', 'created', 38, 'App\\Comment', 6, 'App\\User', '{\"attributes\":{\"post_id\":18}}', '2018-05-05 15:32:57', '2018-05-05 15:32:57'),
+(45, 'default', 'created', 21, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":5}}', '2018-05-05 15:54:28', '2018-05-05 15:54:28'),
+(46, 'default', 'created', 39, 'App\\Comment', 6, 'App\\User', '{\"attributes\":{\"post_id\":15}}', '2018-05-05 15:55:05', '2018-05-05 15:55:05');
 
 -- --------------------------------------------------------
 
@@ -109,9 +121,13 @@ INSERT INTO `comments` (`id`, `comment`, `post_id`, `user_id`, `created_at`, `up
 (28, 'HYPU!!!', 9, 3, '2018-02-22 15:26:43', '2018-02-22 15:26:43'),
 (29, 'COMMENT', 8, 2, '2018-02-23 02:17:12', '2018-02-23 02:17:12'),
 (30, 'Hi Jane <3', 9, 2, '2018-02-23 03:23:45', '2018-02-23 04:21:28'),
-(31, 'Talaga ba??', 11, 2, '2018-02-23 04:40:06', '2018-02-23 04:40:06'),
 (32, 'KEKEKEKE', 5, 5, '2018-03-03 05:57:19', '2018-03-03 05:57:19'),
-(33, 'lorem ipsum.. lorem ipsum...', 5, 3, '2018-03-03 06:43:52', '2018-03-03 06:43:52');
+(33, 'lorem ipsum.. lorem ipsum...', 5, 3, '2018-03-03 06:43:52', '2018-03-03 06:43:52'),
+(35, 'delete dis mushit', 18, 1, '2018-03-05 04:43:27', '2018-03-05 04:43:40'),
+(36, 'sexy', 15, 1, '2018-03-05 04:55:20', '2018-03-05 04:55:20'),
+(37, 'comment (edited)', 18, 3, '2018-03-05 06:43:00', '2018-03-05 06:43:14'),
+(38, 'Hehehehllo asdasdas', 18, 6, '2018-05-05 15:32:56', '2018-05-05 15:33:11'),
+(39, 'manyak si mark', 15, 6, '2018-05-05 15:55:04', '2018-05-05 15:55:04');
 
 -- --------------------------------------------------------
 
@@ -136,11 +152,11 @@ INSERT INTO `followers` (`id`, `user_id`, `follow_id`, `created_at`, `updated_at
 (4, 5, 1, '2018-02-23 11:04:30', '2018-02-23 11:04:30'),
 (7, 2, 1, '2018-02-23 13:11:16', '2018-02-23 13:11:16'),
 (32, 2, 3, '2018-02-23 14:12:24', '2018-02-23 14:12:24'),
-(41, 3, 1, '2018-02-26 02:25:45', '2018-02-26 02:25:45'),
 (42, 5, 3, '2018-03-03 03:15:45', '2018-03-03 03:15:45'),
 (75, 5, 2, '2018-03-03 04:04:41', '2018-03-03 04:04:41'),
 (78, 1, 2, '2018-03-03 14:31:30', '2018-03-03 14:31:30'),
-(81, 1, 3, '2018-03-03 14:36:01', '2018-03-03 14:36:01');
+(83, 1, 3, '2018-03-05 04:56:08', '2018-03-05 04:56:08'),
+(84, 3, 1, '2018-03-05 06:44:55', '2018-03-05 06:44:55');
 
 -- --------------------------------------------------------
 
@@ -169,7 +185,16 @@ INSERT INTO `messages` (`id`, `message`, `user_id`, `created_at`, `updated_at`) 
 (35, 'Hi mark...', 3, '2018-02-27 04:16:15', '2018-02-27 04:16:15'),
 (52, 'Lorem ipsum dolor........ Lorem ipsum dolor........ Lorem ipsum dolor........ Lorem ipsum dolor........', 3, '2018-03-03 02:51:37', '2018-03-03 02:51:37'),
 (53, 'Dolor lorem... Dolor lorem... Dolor lorem... Dolor lorem... Dolor lorem... Dolor lorem... Dolor lorem... Dolor lorem...', 2, '2018-03-03 02:51:53', '2018-03-03 02:51:53'),
-(54, 'a', 1, '2018-03-03 03:05:04', '2018-03-03 03:05:04');
+(54, 'a', 1, '2018-03-03 03:05:04', '2018-03-03 03:05:04'),
+(55, 'Hello', 1, '2018-03-05 04:27:34', '2018-03-05 04:27:34'),
+(56, 'Hehehe', 2, '2018-03-05 04:28:10', '2018-03-05 04:28:10'),
+(57, 'john doe', 2, '2018-03-05 04:31:00', '2018-03-05 04:31:00'),
+(58, 'dafuk', 1, '2018-03-05 05:31:57', '2018-03-05 05:31:57'),
+(59, 'dfqk', 1, '2018-03-05 05:32:18', '2018-03-05 05:32:18'),
+(60, 'Lorence', 1, '2018-03-05 06:48:14', '2018-03-05 06:48:14'),
+(61, 'grasl', 3, '2018-03-05 06:48:28', '2018-03-05 06:48:28'),
+(62, '~Miracle', 1, '2018-03-05 06:48:39', '2018-03-05 06:48:39'),
+(63, 'Trust the process', 1, '2018-03-05 06:49:17', '2018-03-05 06:49:17');
 
 -- --------------------------------------------------------
 
@@ -244,14 +269,15 @@ INSERT INTO `posts` (`id`, `title`, `content`, `image`, `video`, `user_id`, `top
 (8, 'Game of Thrones Season 8 hype!', 'I can\'t wait to watch the final season of game of thrones! vry excited!', 'gots8.jpg', '', 2, 13, '2018-02-22 14:02:40', '2018-02-22 14:02:40'),
 (9, 'World of Warcraft Classic', 'WoW Classic is going to happen soon >:D', 'wow.jpg', '', 2, 14, '2018-02-22 14:33:31', '2018-02-23 05:30:18'),
 (10, 'Sample post ni Jane Doe', 'Nagsalita si Jane Doe tungkol sa kanyang unang talata.', '', '', 3, 6, '2018-02-22 15:25:17', '2018-02-22 15:25:17'),
-(11, 'Mathematician si Jane Doe', 'Okay...', '', '', 3, 3, '2018-02-22 15:26:13', '2018-02-22 15:26:13'),
 (12, 'OpenAI', 'I love bacon..', 'openai.png', '', 5, 4, '2018-03-03 14:41:43', '2018-03-03 14:41:43'),
 (13, 'The Boring Company', 'A real flamethrower to kill all zombies.', 'flamethrower.jpg', '', 5, 1, '2018-03-03 14:50:18', '2018-03-03 14:50:18'),
 (14, 'Final Fantasy 7', 'Kekekekeke', 'ff7.jpg', '', 3, 14, '2018-03-03 15:13:43', '2018-03-03 15:25:26'),
-(15, 'My name is Aeris Gainsborough', 'Lorem ipsum dolorrrrrrrrrrrrrrrrrrrrrr....', 'aeris.jpg', '', 3, 6, '2018-03-03 15:28:00', '2018-03-03 15:28:00'),
+(15, 'My name is Aeris Gainsborough', 'edited', 'aeris.jpg', '', 3, 6, '2018-03-03 15:28:00', '2018-03-05 06:43:45'),
 (16, 'Zidane Tribal', 'Say something...', 'zidane.jpg', '', 1, 14, '2018-03-03 15:29:49', '2018-03-03 15:29:49'),
-(17, 'A blackhole', '...', 'blackhole.jpg', '', 1, 2, '2018-03-03 15:31:57', '2018-03-03 15:31:57'),
-(18, 'Dota 2', 'duta', 'dota.jpg', '', 1, 14, '2018-03-03 15:33:02', '2018-03-03 15:33:02');
+(17, 'A blackhole', '...kjljlk', 'blackhole.jpg', '', 1, 2, '2018-03-03 15:31:57', '2018-03-05 04:28:47'),
+(18, 'Dota 2', 'dutaqwewq', 'dota.jpg', '', 1, 14, '2018-03-03 15:33:02', '2018-03-05 04:33:28'),
+(20, 'New Post', 'A news', '', '', 2, 6, '2018-03-05 05:09:07', '2018-03-05 05:09:07'),
+(21, 'Sample Post by Nikola Tesla', 'We made it!', '', '', 6, 5, '2018-05-05 15:54:28', '2018-05-05 15:54:28');
 
 -- --------------------------------------------------------
 
@@ -301,10 +327,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Mark Munsayac', 'mark@gmail.com', '$2y$10$6GccUd7fmI.OKAddtMBwNOMfanSOUBw7hXMsiSXikMno4dq4mJYZi', 'KN7qVhVvDe0vm8MSRVIVYduYFjVtGYNLnFHwXdJ7HlhIeosOdlkGJxCEEf2a', '2018-02-20 10:50:40', '2018-02-21 11:00:33'),
+(1, 'Mark Munsayac', 'mark@gmail.com', '$2y$10$6GccUd7fmI.OKAddtMBwNOMfanSOUBw7hXMsiSXikMno4dq4mJYZi', '1u8mqWBd0WqxKrhe45zAtAiJLVHxTSp7MBTExmvcX316yqKQpsrWYPBkeUS7', '2018-02-20 10:50:40', '2018-02-21 11:00:33'),
 (2, 'John Doe', 'john@gmail.com', '$2y$10$OlVfLF0DL/k4uPut2RcJpeX02RA6lmlly8RJVUTsC3rfUOr8dC/zK', 'Lh0gkz5giWxO6WCnjAwB02W7vG0Bk4jAU7alJb21fhGZdXZW3HEBK6rbx9Kl', '2018-02-20 11:07:03', '2018-02-20 11:07:03'),
-(3, 'Jane Doe', 'jane@gmail.com', '$2y$10$bE6.IB6r06ydWxutMB2kO.RFW0sshZ1iU2Ed7xINiaouGfy2DjZLm', 'anzpSvCe4gnicZslIhCJHJlH3DhJrAKHVJpMmTVwTs5C6jOolvssMKhSMXun', '2018-02-21 15:02:46', '2018-02-21 15:02:46'),
-(5, 'Elon Musk', 'elonmusk@gmail.com', '$2y$10$8qkacQZ5euHCGCd/eZtGO.RdH4rGqEYr2m6Fm7yYfhRGSK6zU4b/m', 'jA2lu80gsV40JvHofFKFwAfryzOuDk13oCibws6lB8c8GwAiglZvV2WDvjTy', '2018-02-21 15:04:38', '2018-02-21 15:04:38');
+(3, 'Jane Doe', 'jane@gmail.com', '$2y$10$bE6.IB6r06ydWxutMB2kO.RFW0sshZ1iU2Ed7xINiaouGfy2DjZLm', '4PjdvhuWQqWonPJ9P2fAPhylk5kId1RVLkOG32nJvVU6gTucRanKJQ7r49Zj', '2018-02-21 15:02:46', '2018-02-21 15:02:46'),
+(5, 'Elon Musk', 'elonmusk@gmail.com', '$2y$10$8qkacQZ5euHCGCd/eZtGO.RdH4rGqEYr2m6Fm7yYfhRGSK6zU4b/m', 'jA2lu80gsV40JvHofFKFwAfryzOuDk13oCibws6lB8c8GwAiglZvV2WDvjTy', '2018-02-21 15:04:38', '2018-02-21 15:04:38'),
+(6, 'Tesla', 'tesla@gmail.com', '$2y$10$k07534kNIUFzZwqCZynqduUi3jZkJw0gJHNfHZlibZ9iu5x2v7OAi', NULL, '2018-05-05 15:28:43', '2018-05-05 15:28:43');
 
 -- --------------------------------------------------------
 
@@ -329,10 +356,11 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`id`, `avatar`, `age`, `gender`, `bio`, `location`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'beijing.JPG', 24, 'Male', '*Insert very long bio here...*', 'PH', 1, '2018-02-20 10:50:40', '2018-02-22 07:53:12'),
+(1, 'beijing.JPG', 24, 'Male', '*Insert very long bio here...*', 'PH', 1, '2018-02-20 10:50:40', '2018-03-05 02:33:03'),
 (2, 'joker.jpg', 45, 'Male', 'I am John Doe.. Duh?!', 'Sa puso ni Jane Doe', 2, '2018-02-20 11:07:04', '2018-02-23 05:17:19'),
-(3, 'aeris.png', 16, 'Male', 'Bio ni Jane Doe', 'Sa puso mo', 3, '2018-02-21 15:02:46', '2018-02-23 05:28:38'),
-(5, NULL, NULL, NULL, NULL, NULL, 5, '2018-02-21 15:04:38', '2018-02-21 15:04:38');
+(3, 'aeris.png', 16, 'Female', 'Bio ni Jane Doe', 'Sa puso mo', 3, '2018-02-21 15:02:46', '2018-03-05 06:47:09'),
+(5, NULL, NULL, NULL, NULL, NULL, 5, '2018-02-21 15:04:38', '2018-02-21 15:04:38'),
+(6, NULL, 42, 'Male', 'Nikola Tesla', 'NY', 6, '2018-05-05 15:28:43', '2018-05-05 15:31:02');
 
 --
 -- Indexes for dumped tables
@@ -414,25 +442,25 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `followers`
 --
 ALTER TABLE `followers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -444,7 +472,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `topics`
@@ -456,13 +484,13 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
