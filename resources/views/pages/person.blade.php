@@ -125,14 +125,14 @@
 								</small>
 							</div>
 						</div>
-						
-						@if(!empty($activity->subject->post['image']))
-						<div class="pb-2 image-wrapper">
-								<a href="/posts/{{ $activity->subject->post['id'] }}">
-									<img src='{{ asset("storage/upload/post/".$activity->subject->post['image']) }}' class="post-image">
-								</a>
-						</div>	
-						@endif
+							
+							@if(!empty($activity->subject->post['image']))
+							<div class="pb-2 image-wrapper">
+									<a href="/posts/{{ $activity->subject->post['id'] }}">
+										<img src='{{ asset("storage/upload/post/".$activity->subject->post['image']) }}' class="post-image">
+									</a>
+							</div>	
+							@endif
 
 
 						<div>
