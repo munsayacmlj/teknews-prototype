@@ -105,7 +105,7 @@
 								{{ $activity->causer->name }}
 							</a>
 							posted in
-							<a href="#"> {{ $activity->subject->topic->topic }}.</a>
+							<a href="/posts/?topic={{ strtolower($activity->subject->topic->topic) }}"> {{ $activity->subject->topic->topic }}.</a>
 						</p>
 						@endif
 					</div> {{-- first-column --}}
@@ -114,6 +114,7 @@
 					{{-- second-column --}}
 					<div class="second-column px-1">
 						@if($activity->subject_type == "App\Comment")
+						
 						<div class="pb-2">
 							<div class="pb-1">
 								<a href="/posts/{{ $activity->subject->post['id'] }}">
@@ -121,7 +122,7 @@
 								</a>
 							</div>
 							<div>
-								<small><i class="fas fa-tag"></i> Posted in <a href="#">{{ $activity->subject->post->topic['topic'] }}</a>
+								<small><i class="fas fa-tag"></i> Posted in <a href="/posts/?topic={{ strtolower($activity->subject->post->topic->topic) }}">{{ $activity->subject->post->topic->topic }}</a>
 								</small>
 							</div>
 						</div>
@@ -145,8 +146,9 @@
 							</p>
 						</div>
 						
-						@elseif($activity->subject_type == "App\Post")	
-							<a href="/posts/{{ $activity->subject->post['id'] }}">
+						@elseif($activity->subject_type == 'App\Post')	
+						
+							<a href="/posts/{{ $activity->subject->id }}">
 								<div>
 									<p>
 										<span class="h6">{{ $activity->subject->title }}</span>

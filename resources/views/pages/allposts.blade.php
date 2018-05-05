@@ -100,7 +100,8 @@
 		</div>
 	</div>
 	
-
+    
+    {{-- Modal for creatig new Post --}}
 	<div class="modal fade stick-up" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 0;">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
