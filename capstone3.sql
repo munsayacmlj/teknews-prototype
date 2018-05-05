@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2018 at 05:57 PM
+-- Generation Time: May 05, 2018 at 08:46 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -87,7 +87,15 @@ INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_id`, `subj
 (43, 'default', 'deleted', 11, 'App\\Post', 3, 'App\\User', '{\"attributes\":{\"topic_id\":3}}', '2018-03-05 06:49:42', '2018-03-05 06:49:42'),
 (44, 'default', 'created', 38, 'App\\Comment', 6, 'App\\User', '{\"attributes\":{\"post_id\":18}}', '2018-05-05 15:32:57', '2018-05-05 15:32:57'),
 (45, 'default', 'created', 21, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":5}}', '2018-05-05 15:54:28', '2018-05-05 15:54:28'),
-(46, 'default', 'created', 39, 'App\\Comment', 6, 'App\\User', '{\"attributes\":{\"post_id\":15}}', '2018-05-05 15:55:05', '2018-05-05 15:55:05');
+(46, 'default', 'created', 39, 'App\\Comment', 6, 'App\\User', '{\"attributes\":{\"post_id\":15}}', '2018-05-05 15:55:05', '2018-05-05 15:55:05'),
+(47, 'default', 'created', 40, 'App\\Comment', 6, 'App\\User', '{\"attributes\":{\"post_id\":21}}', '2018-05-05 16:23:25', '2018-05-05 16:23:25'),
+(48, 'default', 'created', 22, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":3}}', '2018-05-05 16:46:29', '2018-05-05 16:46:29'),
+(49, 'default', 'deleted', 21, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":5}}', '2018-05-05 16:53:48', '2018-05-05 16:53:48'),
+(50, 'default', 'deleted', 22, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":3}}', '2018-05-05 16:53:59', '2018-05-05 16:53:59'),
+(51, 'default', 'created', 23, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":1}}', '2018-05-05 16:54:34', '2018-05-05 16:54:34'),
+(55, 'default', 'created', 25, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":1}}', '2018-05-05 18:09:54', '2018-05-05 18:09:54'),
+(56, 'default', 'deleted', 25, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":1}}', '2018-05-05 18:17:03', '2018-05-05 18:17:03'),
+(57, 'default', 'created', 26, 'App\\Post', 6, 'App\\User', '{\"attributes\":{\"topic_id\":1}}', '2018-05-05 18:17:34', '2018-05-05 18:17:34');
 
 -- --------------------------------------------------------
 
@@ -277,7 +285,7 @@ INSERT INTO `posts` (`id`, `title`, `content`, `image`, `video`, `user_id`, `top
 (17, 'A blackhole', '...kjljlk', 'blackhole.jpg', '', 1, 2, '2018-03-03 15:31:57', '2018-03-05 04:28:47'),
 (18, 'Dota 2', 'dutaqwewq', 'dota.jpg', '', 1, 14, '2018-03-03 15:33:02', '2018-03-05 04:33:28'),
 (20, 'New Post', 'A news', '', '', 2, 6, '2018-03-05 05:09:07', '2018-03-05 05:09:07'),
-(21, 'Sample Post by Nikola Tesla', 'We made it!', '', '', 6, 5, '2018-05-05 15:54:28', '2018-05-05 15:54:28');
+(26, 'A short post', 'I will handle long posts later.\r\nA Tesla coil.\r\n<h1>hello</h1>', 'coil.jpg', '', 6, 1, '2018-05-05 18:17:34', '2018-05-05 18:20:02');
 
 -- --------------------------------------------------------
 
@@ -331,7 +339,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 (2, 'John Doe', 'john@gmail.com', '$2y$10$OlVfLF0DL/k4uPut2RcJpeX02RA6lmlly8RJVUTsC3rfUOr8dC/zK', 'Lh0gkz5giWxO6WCnjAwB02W7vG0Bk4jAU7alJb21fhGZdXZW3HEBK6rbx9Kl', '2018-02-20 11:07:03', '2018-02-20 11:07:03'),
 (3, 'Jane Doe', 'jane@gmail.com', '$2y$10$bE6.IB6r06ydWxutMB2kO.RFW0sshZ1iU2Ed7xINiaouGfy2DjZLm', '4PjdvhuWQqWonPJ9P2fAPhylk5kId1RVLkOG32nJvVU6gTucRanKJQ7r49Zj', '2018-02-21 15:02:46', '2018-02-21 15:02:46'),
 (5, 'Elon Musk', 'elonmusk@gmail.com', '$2y$10$8qkacQZ5euHCGCd/eZtGO.RdH4rGqEYr2m6Fm7yYfhRGSK6zU4b/m', 'jA2lu80gsV40JvHofFKFwAfryzOuDk13oCibws6lB8c8GwAiglZvV2WDvjTy', '2018-02-21 15:04:38', '2018-02-21 15:04:38'),
-(6, 'Tesla', 'tesla@gmail.com', '$2y$10$k07534kNIUFzZwqCZynqduUi3jZkJw0gJHNfHZlibZ9iu5x2v7OAi', NULL, '2018-05-05 15:28:43', '2018-05-05 15:28:43');
+(6, 'Nikola Tesla', 'tesla@gmail.com', '$2y$10$k07534kNIUFzZwqCZynqduUi3jZkJw0gJHNfHZlibZ9iu5x2v7OAi', NULL, '2018-05-05 15:28:43', '2018-05-05 18:38:01');
 
 -- --------------------------------------------------------
 
@@ -360,7 +368,7 @@ INSERT INTO `user_details` (`id`, `avatar`, `age`, `gender`, `bio`, `location`, 
 (2, 'joker.jpg', 45, 'Male', 'I am John Doe.. Duh?!', 'Sa puso ni Jane Doe', 2, '2018-02-20 11:07:04', '2018-02-23 05:17:19'),
 (3, 'aeris.png', 16, 'Female', 'Bio ni Jane Doe', 'Sa puso mo', 3, '2018-02-21 15:02:46', '2018-03-05 06:47:09'),
 (5, NULL, NULL, NULL, NULL, NULL, 5, '2018-02-21 15:04:38', '2018-02-21 15:04:38'),
-(6, NULL, 42, 'Male', 'Nikola Tesla', 'NY', 6, '2018-05-05 15:28:43', '2018-05-05 15:31:02');
+(6, 'tesla.jpeg', 42, 'Male', 'Nikola Tesla', 'NY', 6, '2018-05-05 15:28:43', '2018-05-05 16:15:20');
 
 --
 -- Indexes for dumped tables
@@ -442,13 +450,13 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `followers`
@@ -472,7 +480,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `topics`
