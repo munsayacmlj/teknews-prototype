@@ -24,7 +24,9 @@
 						</div>
 
 						<div class="second-row py-3">
-							<span class="h5 user">{{ $post->user->name }}</span>
+							<a href="/people/{!! $post->user->getSnakeCaseName() !!}">
+								<span class="h5 user">{{ $post->user->name }}</span>
+							</a>
 						</div>
 
 						<div class="third-row py-1">
@@ -41,10 +43,10 @@
 						</div>
 					</div>
 					
-					@if (!empty($post->image))
+					@if ( $post->hasImage() )
 					<div class="col col-sm-12 col-md-6 mt-5">
 						<div class="post-image">
-							<img src='{{ asset("uploads/post/$post->image") }}'>
+							<img src='{!! $post->getImagepath() !!}'>
 						</div>
 					</div>
 					@endif
