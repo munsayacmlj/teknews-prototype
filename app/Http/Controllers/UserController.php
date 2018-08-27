@@ -66,13 +66,15 @@ class UserController extends Controller
     $profile->userDetail->bio = $request->bio;
 
     if ($request->delete_image) {
-      self::deleteImage($profile->userDetail->avatar);
-      $profile->userDetail->avatar = "";
+      if ($profile->hasPhoto()) {
+        $this->deleteImage($profile->userDetail->avatar);
+        $profile->userDetail->avatar = "";
+      }
     }
 
     if ($request->hasFile('avatar')) {
       if (!empty($profile->userDetail->avatar)) {
-        self::deleteImage($profile->userDetail->avatar);
+        $this->deleteImage($profile->userDetail->avatar);
       }
 
       $filename = $request->file('avatar')->getClientOriginalName();
@@ -92,7 +94,10 @@ class UserController extends Controller
     return redirect($url);
   }
 
-  private static function deleteImage($image_name) {
+  /**
+   * @Implements
+   */
+  public function deleteImage($image_name) {
     $image_path = public_path() . '\\storage\\upload\\user_avatar\\' . $image_name;
     unlink($image_path);
   }

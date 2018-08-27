@@ -60,4 +60,18 @@ class User extends Authenticatable
     public function following() {
         return $this->belongsToMany(self::class, 'followers', 'user_id', 'follow_id')->withTimestamps();
     }
+
+    public function getPhotoPath() {
+        if ( file_exists( public_path() . '/storage/upload/user_avatar/' . $this->userDetail->avatar ) ) {
+            return '/storage/upload/user_avatar/' . $this->userDetail->avatar;
+        } else {
+            return '/storage/upload/user_avatar/default.png';
+        }
+    }
+
+    public function hasPhoto() {
+        if ( !empty($this->userDetail->avatar) ) {
+            return file_exists( public_path() . '/storage/upload/user_avatar/' . $this->userDetail->avatar );
+        }
+    }
 }

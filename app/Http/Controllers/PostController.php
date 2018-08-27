@@ -115,8 +115,7 @@ class PostController extends Controller
 
     if ($request->hasFile('image')) {
       if (!empty($post->image)) {
-        $image_path = public_path() . '\\storage\\upload\\post\\' . $post->image;
-        unlink($image_path);
+        self::deleteImage($post->image);
       }
 
       $filename = $request->file('image')->getClientOriginalName();
@@ -138,5 +137,13 @@ class PostController extends Controller
   public function showTopic(Request $request) {
 
     dd($request->query('topic'));
+  }
+
+  /**
+   * @Implements
+   */
+  private static function deleteImage($image_name) {
+    $image_path = public_path() . '\\storage\\upload\\user_avatar\\' . $image_name;
+    unlink($image_path);
   }
 }
