@@ -1,5 +1,5 @@
 <?php
 
-Interface DeleteImageInterface {
+interface DeleteImageInterface {
 	public function deleteImage($image_name);
 }

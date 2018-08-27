@@ -12,7 +12,7 @@ use Auth;
 use Illuminate\Http\Request;
 
 
-class PostController extends Controller
+class PostController extends BaseController
 {
   public function showAllPosts(Request $request) {
     $f = Follower::select('follow_id')->where('user_id', Auth::user()->id)->get();
@@ -108,14 +108,15 @@ class PostController extends Controller
     $post->topic_id = $request->topic;
 
     if ($request->delete_image) {
-      $image_path = public_path() . '\\storage\\upload\\post\\' . $post->image;
-      unlink($image_path);
-      $post->image = "";
+      if ( $post->hasImage() ) {
+        $this->deleteImage($post->image);
+        $post->image = "";
+      }  
     }
 
     if ($request->hasFile('image')) {
-      if (!empty($post->image)) {
-        self::deleteImage($post->image);
+      if ( $post->hasImage() ) {
+        $this->deleteImage($post->image);
       }
 
       $filename = $request->file('image')->getClientOriginalName();
@@ -139,11 +140,8 @@ class PostController extends Controller
     dd($request->query('topic'));
   }
 
-  /**
-   * @Implements
-   */
-  private static function deleteImage($image_name) {
-    $image_path = public_path() . '\\storage\\upload\\user_avatar\\' . $image_name;
+  private function deleteImage($image_name) {
+    $image_path = public_path() . '\\storage\\upload\\post\\' . $image_name;
     unlink($image_path);
   }
 }

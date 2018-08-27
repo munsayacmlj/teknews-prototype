@@ -7,7 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
 
-class CommentController extends Controller
+class CommentController extends BaseController
 {
     public function saveComment(Request $request, $id) {
     	$comment = new Comment();

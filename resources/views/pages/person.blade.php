@@ -277,5 +277,5 @@
 		</div>
 	</div>
 </div> <!-- container -->
-
+@include('partials.modal')
 @endsection

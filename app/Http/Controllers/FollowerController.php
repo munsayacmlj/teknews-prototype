@@ -7,7 +7,7 @@ use App\User;
 use App\Follower;
 use Illuminate\Http\Request;
 
-class FollowerController extends Controller
+class FollowerController extends BaseController
 {
     // Make user one follow user 2 (does not check if already following)
     public function followsUser(Request $request, $name)

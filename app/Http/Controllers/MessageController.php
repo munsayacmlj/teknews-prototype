@@ -9,7 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Events\MessagePosted;
 
-class MessageController extends Controller
+class MessageController extends BaseController
 {
     public function viewChat() {
     	$topics = Topic::all();

@@ -12,7 +12,7 @@ use App\Follower;
 use Spatie\Activitylog\Models\Activity;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
   public function showUsers() {
     $all_users = User::all();
@@ -73,7 +73,7 @@ class UserController extends Controller
     }
 
     if ($request->hasFile('avatar')) {
-      if (!empty($profile->userDetail->avatar)) {
+      if ($profile->hasPhoto()) {
         $this->deleteImage($profile->userDetail->avatar);
       }
 
@@ -94,10 +94,7 @@ class UserController extends Controller
     return redirect($url);
   }
 
-  /**
-   * @Implements
-   */
-  public function deleteImage($image_name) {
+  private function deleteImage($image_name) {
     $image_path = public_path() . '\\storage\\upload\\user_avatar\\' . $image_name;
     unlink($image_path);
   }

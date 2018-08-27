@@ -31,4 +31,10 @@ class Post extends Model
             ->groupBy('post_id')
             ->orderBy('top_posts', 'desc');
     }
+
+    public function hasImage() {
+        if ( ! empty( $this->image ) ) {
+            return file_exists( public_path() . '/storage/upload/post/' . $this->image );
+        }
+    }
 }

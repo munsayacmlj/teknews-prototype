@@ -109,4 +109,5 @@
 		</div>
 	</section>
 </div> {{-- edit-profile-wrapper --}}
+@include('partials.modal')
 @endsection
