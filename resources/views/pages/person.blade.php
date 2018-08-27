@@ -138,7 +138,6 @@
 							</div>	
 							@endif
 
-
 						<div>
 							<p>
 								{{ $activity->subject->comment}}
@@ -159,9 +158,11 @@
 								</div>
 							</a>
 							
-							@if(!empty($activity->subject->image))
+							@if( $activity->subject->hasImage() )
 							<div class="pb-2 image-wrapper">
-									<img src='{{ asset("uploads/post/".$activity->subject->image) }}' class="post-image">
+								<a href="/posts/{{ $activity->subject->id }}">
+									<img src='{!! $activity->subject->getImagepath() !!}' class="post-image">
+								</a>
 							</div>	
 							@endif
 							<div>
@@ -209,11 +210,7 @@
 
 								<div class="profile-summary">
 									<a href="#" class="user-pic float-left mr-3">
-										@if(!empty($follower->userDetail->avatar))
-										<img src='{{ asset("uploads/user_avatar/".$follower->userDetail->avatar) }}'>
-										@else
-										<img src="{{ asset('images/default.png') }}">
-										@endif
+										<img src="{!! $follower->getPhotoPath() !!}">
 									</a>
 									<div class="user-details">
 										<h5><a href="/people/{{ $follower->name }}">{{ $follower->name }}</a></h6>
@@ -254,11 +251,7 @@
 
 								<div class="profile-summary">
 									<a href="#" class="user-pic float-left mr-3">
-										@if(!empty($my_following->userDetail->avatar))
-										<img src='{{ asset("uploads/user_avatar/".$my_following->userDetail->avatar) }}'>
-										@else
-										<img src="{{ asset('images/default.png') }}">
-										@endif
+										<img src="{!! $my_following->getPhotoPath() !!}">
 									</a>
 									<div class="user-details">
 										<h5><a href="/people/{{ $my_following->name }}">{{ $my_following->name }}</a></h6>
