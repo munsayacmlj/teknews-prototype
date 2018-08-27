@@ -31,14 +31,8 @@
 								<div class="col-sm-2">
 									<div class="form-group">
 										<label for="age">Age</label>
-
-										<select name="age" id="age" class="form-control">
-											<option selected disabled></option>
-											@for ($i=13; $i<=99; $i++)
-											<option value="{{ $i }}" @if($profile->userDetail->age == $i) selected @endif>{{ $i }}</option>
-											@endfor
-											<option value="100">100+</option>
-										</select>
+										
+										<input class="form-control" type="text" name="age" value="{{ $profile->userDetail->age }}">
 									</div>
 								</div>
 								
@@ -94,9 +88,9 @@
 
 									<span class="input-group-btn">
 										 <div class="btn btn-primary btn-sm my-2 custom-file-uploader">
-			                                <input type="file" name="avatar" id="edit-image">
-			                                <i class="fas fa-folder-open fa-2x"></i>                    
-			                            </div>
+                        <input type="file" name="avatar" id="edit-image">
+                        <i class="fas fa-folder-open fa-2x"></i>                    
+	                    </div>
 									</span> 
 								</div> {{-- file-input --}}
 								<div class="form-group">

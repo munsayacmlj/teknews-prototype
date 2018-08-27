@@ -12,9 +12,16 @@
 			@endif
 		</div>
 		
-		<div class="col col-sm-8 col-md-5">
+		<div class="col col-sm-8 col-md-5 profile-details">
 			<h1>{{ $profile->name }}</h1>
 			<p>{{ $profile->userDetail->bio }}</p>
+			@if ( $profile->name != Auth::user()->name )
+				@if ( in_array($profile->id, $following) )
+					<a href="#" class="px-3 py-2 btn btn-warning unfollow-user-btn" data-user="{{ $profile->name }}" data-id="{{ $profile->id }}" id="uf-btn-{{ $profile->id }}"><i class="fas fa-user-times"></i> Unfollow</a>
+				@else
+				  <a href="#" class="px-3 py-2 btn btn-info follow-user-btn" data-user="{{ $profile->name }}" data-id="{{ $profile->id }}" id="f-btn-{{ $profile->id }}"><i class="fas fa-user-plus"></i> Follow</a>
+				@endif
+			@endif
 		</div>
 
 		<div class="d-sm-none d-md-block col col-md-2">

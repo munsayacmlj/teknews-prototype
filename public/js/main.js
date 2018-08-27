@@ -14,17 +14,32 @@ $(window).on('load', function() {
 	});
 });
 
+var changeFollowToUnfollow = (userId, newId) => {
+	$("#f-btn-"+userId).html('<i class="fas fa-user-times"></i> Unfollow');   
+	$("#f-btn-"+userId).removeClass('follow-user-btn');		
+	$("#f-btn-"+userId).addClass('unfollow-user-btn');	
+	$("#f-btn-"+userId).removeClass('btn-info').addClass('btn-warning');	
+	$("#f-btn-"+userId).attr('id', newId);
+}
+
+var changeUnfollowToFollow = (userId, newId) => {
+	$("#uf-btn-"+userId).html('<i class="fas fa-user-plus"></i> Follow'); 
+	$("#uf-btn-"+userId).removeClass('unfollow-user-btn');		
+	$("#uf-btn-"+userId).addClass('follow-user-btn');
+	$("#uf-btn-"+userId).removeClass('btn-warning').addClass('btn-info');
+	$("#uf-btn-"+userId).attr('id', newId);
+}
 
 $(document).ready(function() {
 
 	$("#image").on("change", function() {
-	    var image = this.files[0].name;
+	    let image = this.files[0].name;
 	    $("#filename").val(image);
 	});
 
 	function readURL(input) {
 		if (input.files && input.files[0]) {
-			var reader = new FileReader();
+			let reader = new FileReader();
 
 			reader.onload = function(e) {
 				$(".image-tag").attr('src', e.target.result);
@@ -40,7 +55,7 @@ $(document).ready(function() {
 
 	$(".delete-post").click(function() {
 		// e.preventDefault();
-		var postId = $(this).data('id');
+		let postId = $(this).data('id');
 		
 		alertify.confirm('Delete Post', 'Are you sure you want to delete this post?', function() {
 			
@@ -69,10 +84,10 @@ $(document).ready(function() {
 
 
 	$(".comment-btn").click(function () {
-		var postId = $(this).data('id');
-		var user = $(this).data('user');
-		var comment = $("#comment-area-"+postId).val();
-		var created_at = $(this).data('time');
+		let postId = $(this).data('id');
+		let user = $(this).data('user');
+		let comment = $("#comment-area-"+postId).val();
+		let created_at = $(this).data('time');
 		$.ajax({
 			headers: {
 	          		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -98,8 +113,8 @@ $(document).ready(function() {
 
 	$(".comment-body-wrapper").on('click', '.delete-comment', function() {
 
-		var commentId = $(this).data('id');
-		var postId = $(this).data('post-id');
+		let commentId = $(this).data('id');
+		let postId = $(this).data('post-id');
 
 		alertify.confirm('Delete Comment', 'Are you sure you want to delete this comment?', function() {
 
@@ -129,9 +144,9 @@ $(document).ready(function() {
 
 
 	$(".comment-body-wrapper").on('click', '.save-comment', function() {
-		var commentId = $(this).data('id');
-		var postId = $(this).data('post-id');
-		var input = $("#commentArea_"+commentId).val();
+		let commentId = $(this).data('id');
+		let postId = $(this).data('post-id');
+		let input = $("#commentArea_"+commentId).val();
 
 		$.ajax({
 			headers: {
@@ -156,15 +171,15 @@ $(document).ready(function() {
 	});
 
 	$(".comment-body-wrapper").on('click', '.edit-comment', function() {
-		var commentId = $(this).data('id');
+		let commentId = $(this).data('id');
 		$("#editDelete_"+commentId).hide();
 		$("#editArea_"+commentId).show();
 		$("#comment_"+commentId).hide();
 	});
 
 	$(".comment-body-wrapper").on('click', '.cancel-comment', function() {
-		var commentId = $(this).data('id');
-		var originalComment = $("#comment_"+commentId).html();
+		let commentId = $(this).data('id');
+		let originalComment = $("#comment_"+commentId).html();
 
 		$("#editDelete_"+commentId).show();
 		$("#commentArea_"+commentId).val(originalComment);
@@ -172,68 +187,106 @@ $(document).ready(function() {
 		$("#comment_"+commentId).show();
 	});
 
+	$(".profile-details").on('click', '.follow-user-btn', function() {
+		let userId = $(this).data('id');
+		let name = $(this).data('user');
+		let newId = "uf-btn-"+userId;
+		$.ajax({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			url: '/people/'+name+'/follow',
+			type: 'POST',
+			data: {
+				userId: userId,
+			},
+			beforeSend: function() {
+				$.blockUI();
+			},
+			success:function(data) {
+				$.unblockUI();
+				changeFollowToUnfollow(userId, newId);
+			}
+		});
 
-	$(".u-f-btn").on('click', '.follow-user-btn', function() {
-		var userId = $(this).data('id');
-		var name = $(this).data('user');
-		var newId = "uf-btn-"+userId;
+	});
+
+	$(".profile-details").on('click', '.unfollow-user-btn', function() {
+		let userId = $(this).data('id');
+		let name = $(this).data('user');
+		let newId = "f-btn-"+userId;
 		$.ajax({
 			headers: {
 		          		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          	},
-          	url: '/people/'+name+'/follow',
-          	type: 'POST',
-          	data:{
-          		userId: userId
-          	},
-          	beforeSend:function() {
-          		$.blockUI();
-          	},
-          	success:function(data) {
-          		// $("#u-f-btn-"+userId).load(" #follow-"+userId);
-          		$.unblockUI();
-       			$("#f-btn-"+userId).html('<i class="fas fa-user-times"></i> Unfollow');   
-       			$("#f-btn-"+userId).removeClass('follow-user-btn');		
-       			$("#f-btn-"+userId).addClass('unfollow-user-btn');	
-       			$("#f-btn-"+userId).removeClass('btn-info').addClass('btn-warning');	
-       			$("#f-btn-"+userId).attr('id', newId);
-          	}
+    	},
+    	url: '/people/'+name+'/unfollow',
+    	type: 'POST',
+    	data: {
+    		userId: userId
+    	},
+    	beforeSend:function() {
+    		$.blockUI();
+    	},
+    	success:function(data) {
+    		$.unblockUI();
+    		changeUnfollowToFollow(userId, newId);
+    	}
+		});
+	})
+
+
+	$(".u-f-btn").on('click', '.follow-user-btn', function() {
+		let userId = $(this).data('id');
+		let name = $(this).data('user');
+		let newId = "uf-btn-"+userId;
+		$.ajax({
+			headers: {
+		          		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    	},
+    	url: '/people/'+name+'/follow',
+    	type: 'POST',
+    	data:{
+    		userId: userId
+    	},
+    	beforeSend:function() {
+    		$.blockUI();
+    	},
+    	success:function(data) {
+    		$.unblockUI();
+	 			changeFollowToUnfollow(userId, newId);
+    	}
 		});	
 	});
 	
 
 	$(".u-f-btn").on('click', '.unfollow-user-btn', function() {
-		var userId = $(this).data('id');
-		var name = $(this).data('user');
-		var newId = "f-btn-"+userId;
+		let userId = $(this).data('id');
+		let name = $(this).data('user');
+		let newId = "f-btn-"+userId;
 		$.ajax({
 			headers: {
 		          		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          	},
-          	url: '/people/'+name+'/unfollow',
-          	type: 'POST',
-          	data: {
-          		userId: userId
-          	},
-          	beforeSend:function() {
-          		$.blockUI();
-          	},
-          	success:function(data) {
-          		$.unblockUI();
-          		$("#uf-btn-"+userId).html('<i class="fas fa-user-plus"></i> Follow'); 
-          		$("#uf-btn-"+userId).removeClass('unfollow-user-btn');		
-       			$("#uf-btn-"+userId).addClass('follow-user-btn');
-       			$("#uf-btn-"+userId).removeClass('btn-warning').addClass('btn-info');
-       			$("#uf-btn-"+userId).attr('id', newId);
-          	}
+    	},
+    	url: '/people/'+name+'/unfollow',
+    	type: 'POST',
+    	data: {
+    		userId: userId
+    	},
+    	beforeSend:function() {
+    		$.blockUI();
+    	},
+    	success:function(data) {
+    		$.unblockUI();
+    		changeUnfollowToFollow(userId, newId);
+    	}
 		});
 		
 	});
 
 	$(".action-btns").on('click', '.follow-user-btn', function(e) {
-		var userId = $(this).data('id');
-		var name = $(this).data('user');
-		var newId = "uf-btn-"+userId;
+		let userId = $(this).data('id');
+		let name = $(this).data('user');
+		let newId = "uf-btn-"+userId;
 		
 		$.ajax({
 			headers: {
@@ -251,31 +304,22 @@ $(document).ready(function() {
 		  		});
           	},
           	complete:function() {
-          		var timer;
+          		let timer;
           		clearTimeout(timer);
           		timer = setTimeout(function() {
           			$('#f-btn-'+userId).unblock();
           		}, 800);
           	},
           	success:function(data) {
-          		// $("#u-f-btn-"+userId).load(" #follow-"+userId);
-          		// $.unblockUI();
-          		// setTimeout($.unblockUI, 2000);
-       			$(".f-user-"+userId).html('<i class="fas fa-user-times"></i>');   
-       			$(".f-user-"+userId).removeClass('follow-user-btn');		
-       			$(".f-user-"+userId).removeClass('btn-info');		
-       			$(".f-user-"+userId).addClass('btn-warning');		
-       			$(".f-user-"+userId).addClass('unfollow-user-btn');	
-       			$(".f-user-"+userId).attr('id', newId);
-       			$(".f-user-"+userId).addClass('uf-user-'+userId).removeClass('f-user-'+userId);
+       				changeFollowToUnfollow(userId, newId);
           	}
 		});	
 	});
 
 	$(".action-btns").on('click', '.unfollow-user-btn', function() {
-		var userId = $(this).data('id');
-		var name = $(this).data('user');
-		var newId = "f-btn-"+userId;
+		let userId = $(this).data('id');
+		let name = $(this).data('user');
+		let newId = "f-btn-"+userId;
 		$.ajax({
 			headers: {
 		          		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -291,20 +335,14 @@ $(document).ready(function() {
 		  		});
           	},
           	complete:function() {
-          		var timer;
+          		let timer;
           		clearTimeout(timer);
           		timer = setTimeout(function() {
           			$('#uf-btn-'+userId).unblock();
           		}, 800);
           	},
           	success:function(data) {
-          		$(".uf-user-"+userId).html('<i class="fas fa-user-plus"></i>'); 
-          		$(".uf-user-"+userId).removeClass('unfollow-user-btn');		
-          		$(".uf-user-"+userId).removeClass('btn-warning');		
-          		$(".uf-user-"+userId).addClass('btn-info');		
-       			$(".uf-user-"+userId).addClass('follow-user-btn');
-       			$(".uf-user-"+userId).attr('id', newId);
-       			$(".uf-user-"+userId).addClass('f-user-'+userId).removeClass('uf-user-'+userId);
+          		changeUnfollowToFollow(userId, newId);
           	}
 		});
 		
@@ -312,9 +350,9 @@ $(document).ready(function() {
 
 
 	$(".list-of-followers").on('click', '.follow-user-btn', function() {
-		var userId = $(this).data('id');
-		var name = $(this).data('user');
-		var newId = "f-btn-"+userId;
+		let userId = $(this).data('id');
+		let name = $(this).data('user');
+		let newId = "f-btn-"+userId;
 		$.ajax({
 			headers: {
 		          		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -330,28 +368,23 @@ $(document).ready(function() {
 		  		});
           	},
           	complete:function() {
-          		var timer;
+          		let timer;
           		clearTimeout(timer);
           		timer = setTimeout(function() {
           			$('#f-btn-'+userId).unblock();
           		}, 800);
           	},
           	success:function(data) {
-          		$("#f-btn-"+userId).html('<i class="fas fa-user-plus"></i> Follow'); 
-          		$("#f-btn-"+userId).removeClass('unfollow-user-btn');		
-          		$("#f-btn-"+userId).removeClass('btn-info');		
-          		$("#f-btn-"+userId).addClass('btn-warning');		
-       			$("#f-btn-"+userId).addClass('follow-user-btn');
-       			$("#f-btn-"+userId).attr('id', newId);
+          		changeFollowToUnfollow(userId, newId);
           	}
 		});
 		
 	});
 
 	$(".list-of-followers").on('click', '.unfollow-user-btn', function() {
-		var userId = $(this).data('id');
-		var name = $(this).data('user');
-		var newId = "f-btn-"+userId;
+		let userId = $(this).data('id');
+		let name = $(this).data('user');
+		let newId = "f-btn-"+userId;
 		$.ajax({
 			headers: {
 		          		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -367,19 +400,14 @@ $(document).ready(function() {
 		  		});
           	},
           	complete:function() {
-          		var timer;
+          		let timer;
           		clearTimeout(timer);
           		timer = setTimeout(function() {
           			$('#uf-btn-'+userId).unblock();
           		}, 800);
           	},
           	success:function(data) {
-          		$("#uf-btn-"+userId).html('<i class="fas fa-user-plus"></i> Follow'); 
-          		$("#uf-btn-"+userId).removeClass('unfollow-user-btn');		
-          		$("#uf-btn-"+userId).removeClass('btn-warning');		
-          		$("#uf-btn-"+userId).addClass('btn-info');		
-       			$("#uf-btn-"+userId).addClass('follow-user-btn');
-       			$("#uf-btn-"+userId).attr('id', newId);
+          		changeUnfollowToFollow(userId, newId);
           	}
 		});
 		

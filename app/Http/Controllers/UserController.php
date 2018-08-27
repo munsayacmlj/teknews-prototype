@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use File;
 use App\User;
 use App\Post;
 use App\Comment;
@@ -13,89 +14,91 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function showUsers() {
-    	$all_users = User::all();
-        $f = Follower::select('follow_id')->where('user_id', Auth::user()->id)->get();
-        $following = [];
-        foreach ($f as $value) {
-            array_push($following, $value->follow_id);
-        }
-
-        $user = str_replace(" ", "-", strtolower(Auth::user()->name));
-    	return view('/pages/people', compact('all_users', 'user', 'f'))->with('following', $following);
+  public function showUsers() {
+    $all_users = User::all();
+    $f = Follower::select('follow_id')->where('user_id', Auth::user()->id)->get();
+    $following = array();
+    foreach ($f as $value) {
+      array_push($following, $value->follow_id);
     }
 
-    public function userPreview($name) {
-        // dd($name);
-        $origName = str_replace("-", " ", $name);
-        $origName = ucwords($origName);
-    	$profile = User::where('name', $origName)->first();
-        $user = str_replace(" ", "-", strtolower(Auth::user()->name));
-        $f = Follower::select('follow_id')->where('user_id', Auth::user()->id)->get();
-        $following = [];
-        foreach ($f as $value) {
-            array_push($following, $value->follow_id);
-        }
-        // $activities = Activity::with('subject', 'causer')->get();
-        $activities = Activity::where('causer_id', $profile->id)->get();
-    	return view('/pages/person', compact('profile', 'user', 'origName', 'activities'))->with('following', $following);
+    $user = str_replace(" ", "-", strtolower(Auth::user()->name));
+    return view('/pages/people', compact('all_users', 'user', 'f'))->with('following', $following);
+  }
+
+  public function userPreview($name) {
+          // dd($name);
+    $origName = str_replace("-", " ", $name);
+    $origName = ucwords($origName);
+    $profile = User::where('name', $origName)->first();
+    $user = str_replace(" ", "-", strtolower(Auth::user()->name));
+
+    /**
+     * Get all the followers
+     */
+    $f = Follower::select('follow_id')->where('user_id', Auth::user()->id)->get();
+    $following = array();
+    foreach ($f as $value) {
+      array_push($following, $value->follow_id);
     }
 
-    public function editUserForm($name) {
-        $profile = User::find(Auth::user()->id);
-        $user = str_replace(" ", "-", strtolower(Auth::user()->name));
-        return view('/pages/edit_profile', compact('profile', 'details', 'user'));
+    /**
+     * Get all the user's activities
+     *
+     */
+    $activities = Activity::where('causer_id', $profile->id)->get();
+    return view('/pages/person', compact('profile', 'user', 'origName', 'activities'))->with('following', $following);
+  }
+
+  public function editUserForm($name) {
+    $profile = User::find(Auth::user()->id);
+    $user = str_replace(" ", "-", strtolower(Auth::user()->name));
+    return view('/pages/edit_profile', compact('profile', 'details', 'user'));
+  }
+
+  public function updateUser(Request $request, $name) {
+
+    $profile = User::find(Auth::user()->id);
+    $profile->name = $request->name;
+    $profile->userDetail->age = $request->age;
+    $profile->userDetail->gender = $request->gender;
+    $profile->userDetail->location = $request->location;
+    $profile->userDetail->bio = $request->bio;
+
+    if ($request->delete_image) {
+      self::deleteImage($profile->userDetail->avatar);
+      $profile->userDetail->avatar = "";
     }
 
-    public function updateUser(Request $request, $name) {
+    if ($request->hasFile('avatar')) {
+      if (!empty($profile->userDetail->avatar)) {
+        self::deleteImage($profile->userDetail->avatar);
+      }
 
-        $profile = User::find(Auth::user()->id);
-        $profile->name = $request->name;
-        $profile->userDetail->age = $request->age;
-        $profile->userDetail->gender = $request->gender;
-        $profile->userDetail->location = $request->location;
-        $profile->userDetail->bio = $request->bio;
+      $filename = $request->file('avatar')->getClientOriginalName();
 
-        if ($request->delete_image) {
-            $image_path = storage_path() . '\\app\\public\\upload\\user_avatar\\' . $profile->userDetail->avatar;
-            unlink($image_path);
-            $profile->userDetail->avatar = "";
-        }
+      $request->file('avatar')->storeAs('public/upload/user_avatar', $filename);
 
-        if ($request->hasFile('avatar')) {
-            if (!empty($profile->userDetail->avatar)) {
-                $image_path = storage_path() . '\\app\\public\\upload\\user_avatar\\' . $profile->userDetail->avatar;
-                unlink($image_path);
-            }
-
-            $filename = $request->file('avatar')->getClientOriginalName();
-
-            $request->file('avatar')->storeAs('public/upload/user_avatar', $filename);
-
-            $profile->userDetail->avatar = $filename;
-        }
-
-        $profile->save();
-        $profile->userDetail->save();
-
-        $request->session()->flash('status', 'Profile updated.');
-
-        $user = str_replace(" ", "-", strtolower(Auth::user()->name));
-        $url = "people/".$user."/edit";
-        return redirect($url);
+      $profile->userDetail->avatar = $filename;
     }
 
-    public function viewActivities(Request $request) {
-        // return $request->id;
-        $posts = Post::where('user_id', $request->id)->get();
-        $comments = Comment::where('user_id', $request->id)->get();
+    $profile->save();
+    $profile->userDetail->save();
 
-        // activity()->log('Look, I logged something');
-        // return response()->json(
-        //     [
-        //         'posts' => $posts,
-        //         'comments' => $comments
-        //     ]);
-        // return Activity::all();
-    }
+    $request->session()->flash('status', 'Profile updated.');
+
+    $user = str_replace(" ", "-", strtolower(Auth::user()->name));
+    $url = "people/".$user."/edit";
+    return redirect($url);
+  }
+
+  private static function deleteImage($image_name) {
+    $image_path = public_path() . '\\storage\\upload\\user_avatar\\' . $image_name;
+    unlink($image_path);
+  }
+
+  public function viewActivities(Request $request) {
+    $posts = Post::where('user_id', $request->id)->get();
+    $comments = Comment::where('user_id', $request->id)->get();
+  }
 }
