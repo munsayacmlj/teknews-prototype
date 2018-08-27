@@ -2,6 +2,7 @@
 
 namespace App;
 
+use File;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -32,9 +33,17 @@ class Post extends Model
             ->orderBy('top_posts', 'desc');
     }
 
+    public function getImagepath() {
+        if ( ! empty( $this->image ) ) {
+            if ( File::exists( public_path() . '/uploads/post/' . $this->image ) ) {
+                return asset('uploads/post/' . $this->image);
+            }
+        }
+    }
+
     public function hasImage() {
         if ( ! empty( $this->image ) ) {
-            return file_exists( public_path() . '/storage/upload/post/' . $this->image );
+            return file_exists( public_path() . '/uploads/post/' . $this->image );
         }
     }
 }

@@ -9,6 +9,7 @@ use App\Topic;
 use App\Comment;
 use App\Follower;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 
@@ -49,7 +50,6 @@ class PostController extends BaseController
             // $posts = $posts->paginate(15);
     }
     return view('pages/allposts', compact('posts', 'topics', 'user'))->with('following', $following)->with('topic_name', 'Most Recent');
-
   }
 
   public function showPost($id) {
@@ -71,13 +71,15 @@ class PostController extends BaseController
     if ($request->hasFile('image')) {
 
       $filename = $request->file('image')->getClientOriginalName();
-
-      $request->file('image')->storeAs('public/upload/post/', $filename);
+      /*
+       * Upload the image to Storage::disk('uploads')
+       */
+      $request->file('image')->storeAs('post', $filename, 'uploads');
 
       $post->image = $filename;
     }
     else{
-      $post->image = '';
+      $post->image = "";
     }
     $post->save();
 
@@ -120,8 +122,10 @@ class PostController extends BaseController
       }
 
       $filename = $request->file('image')->getClientOriginalName();
-
-      $request->file('image')->storeAs('public/upload/post', $filename);
+       /*
+       * Upload the image to Storage::disk('uploads')
+       */   
+      $request->file('image')->storeAs('post', $filename, 'uploads');
 
       $post->image = $filename;
     }
@@ -132,7 +136,6 @@ class PostController extends BaseController
 
     $url = "posts/".$id."/edit";
     return redirect($url);
-          // return view('pages/post');
   }
 
   public function showTopic(Request $request) {
@@ -141,7 +144,7 @@ class PostController extends BaseController
   }
 
   private function deleteImage($image_name) {
-    $image_path = public_path() . '\\storage\\upload\\post\\' . $image_name;
+    $image_path = public_path() . '\\uploads\\post\\' . $image_name;
     unlink($image_path);
   }
 }

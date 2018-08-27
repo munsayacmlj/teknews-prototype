@@ -32,14 +32,10 @@
 
 										<div class="profile-summary">
 											<a href="#" class="user-pic float-left mr-3">
-												@if(!empty($this_user->userDetail->avatar))
-												<img src='{{ asset("storage/upload/user_avatar/".$this_user->userDetail->avatar) }}'>
-												@else
-												<img src="{{ asset('images/default.png') }}">
-												@endif
+												<img src="{!! $this_user->getPhotoPath() !!}">
 											</a>
 											<div class="user-details">
-												<h5><a href="/people/{{ $this_user->name }}">{{ $this_user->name }}</a></h6>
+												<h5><a href="/people/{!! $this_user->getSnakeCaseName() !!}">{{ $this_user->name }}</a></h6>
 												<h6>User</h6>
 											</div>
 										</div>

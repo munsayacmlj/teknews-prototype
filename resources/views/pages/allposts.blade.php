@@ -35,11 +35,7 @@
 				<div class="card bg-light mb-3 grid-sizer grid-item" id="card_{{ $post->id }}">
           <div class="card-header clearfix">
   					<a href="/people/{{ str_replace(" ", "-", strtolower($post->user->name)) }}" class="float-left">
-              @if (!empty($post->user->userDetail->avatar))
-                  <img src='{{ asset("storage/upload/user_avatar/".$post->user->userDetail->avatar) }}' class="user-pic">
-              @else
-                  <img src='{{ asset("images/default.png") }}' class="user-pic">
-              @endif    						
+              <img src="{!! $post->user->getPhotoPath() !!}" class="user-pic">					
               <span class="card-poster mt-1">
                   {{ $post->user->name }}
               </span>
@@ -70,9 +66,9 @@
             </div>
 						<p>{{ $post->content }}</p>
 					</div>
-					@if ($post->image != NULL)
+					@if ($post->hasImage())
             <a href='{{ url("posts/$post->id") }}'>
-    					<img src='{{ asset("storage/upload/post/$post->image") }}'>
+    					<img src='{!! $post->getImagepath() !!}'>
     				</a>
           @endif
 					<div class="card-footer">

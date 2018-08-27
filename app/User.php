@@ -53,25 +53,28 @@ class User extends Authenticatable
         return $this->belongsToMany(self::class, 'followers', 'follow_id', 'user_id')->withTimestamps();
     }
 
-    // public function follow($userIdToFollow) {
-
-    //     return $this->follows()->attach($userIdToFollow);
-    // }
     public function following() {
         return $this->belongsToMany(self::class, 'followers', 'user_id', 'follow_id')->withTimestamps();
     }
 
     public function getPhotoPath() {
-        if ( file_exists( public_path() . '/storage/upload/user_avatar/' . $this->userDetail->avatar ) ) {
-            return '/storage/upload/user_avatar/' . $this->userDetail->avatar;
-        } else {
-            return '/storage/upload/user_avatar/default.png';
+        if ( !empty( $this->userDetail->avatar ) ) {
+            if ( file_exists( public_path() . '/uploads/user_avatar/' . $this->userDetail->avatar ) ) {
+                return asset("uploads/user_avatar/" . $this->userDetail->avatar);
+            }
+        }
+        else {
+            return asset("images/default.png");
         }
     }
 
     public function hasPhoto() {
         if ( !empty($this->userDetail->avatar) ) {
-            return file_exists( public_path() . '/storage/upload/user_avatar/' . $this->userDetail->avatar );
+            return file_exists( public_path() . '/uploads/user_avatar/' . $this->userDetail->avatar );
         }
+    }
+
+    public function getSnakeCaseName() {
+        return str_replace(' ', '-', strtolower($this->name));
     }
 }

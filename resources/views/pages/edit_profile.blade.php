@@ -77,12 +77,7 @@
 									
 									<div class="avatar-preview">
 										<div class="default-avatar">
-											@if(empty($profile->userDetail->avatar))
-											<img src="{{ asset('images/default.png') }}" class="image-tag">
-											@else
-											<img src="{{ asset('storage/upload/user_avatar/'.$profile->userDetail->avatar) }}" class="image-tag">
-											{{-- {{ $details->avatar }} --}}
-											@endif
+											<img src="{!! Auth::user()->getPhotoPath() !!}" class="image-tag">
 										</div>
 									</div>
 

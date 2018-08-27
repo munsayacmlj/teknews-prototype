@@ -68,7 +68,7 @@ class UserController extends BaseController
     if ($request->delete_image) {
       if ($profile->hasPhoto()) {
         $this->deleteImage($profile->userDetail->avatar);
-        $profile->userDetail->avatar = "";
+        $profile->userDetail->avatar = NULL;
       }
     }
 
@@ -78,8 +78,10 @@ class UserController extends BaseController
       }
 
       $filename = $request->file('avatar')->getClientOriginalName();
-
-      $request->file('avatar')->storeAs('public/upload/user_avatar', $filename);
+       /*
+       * Upload the image to Storage::disk('uploads')
+       */
+      $request->file('avatar')->storeAs('user_avatar', $filename, 'uploads');
 
       $profile->userDetail->avatar = $filename;
     }
@@ -95,7 +97,7 @@ class UserController extends BaseController
   }
 
   private function deleteImage($image_name) {
-    $image_path = public_path() . '\\storage\\upload\\user_avatar\\' . $image_name;
+    $image_path = public_path() . '\\uploads\\user_avatar\\' . $image_name;
     unlink($image_path);
   }
 

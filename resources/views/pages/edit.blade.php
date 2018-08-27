@@ -83,7 +83,7 @@
 									<div class="image-row">
 										@if(!empty($post->image))
 										<div class="inner-image">
-											<img src='{{ asset("storage/upload/post/$post->image") }}' id="image-tag">
+											<img src='{{ asset("uploads/post/$post->image") }}' id="image-tag">
 										</div>
 										@else
 										<div class="inner-image">

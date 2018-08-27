@@ -5,11 +5,7 @@
 <div class="container user-page pt-5 pb-4 mt-4">
 	<div class="row px-2">
 		<div class="col col-sm-4 col-md-3 center">
-			@if(empty($profile->userDetail->avatar))
-			<img src='{{ asset("images/default.png") }}'>			
-			@else
-			<img src='{{ asset("storage/upload/user_avatar/".$profile->userDetail->avatar) }}'>
-			@endif
+			<img src="{!! $profile->getPhotoPath() !!}">
 		</div>
 		
 		<div class="col col-sm-8 col-md-5 profile-details">
@@ -93,7 +89,7 @@
 						
 						@if ($activity->subject_type == "App\Comment")
 						<p>
-							<a href="/people/{{ str_replace(" ", "-", strtolower($activity->causer->name)) }}">{{ $activity->causer->name }}</a> commented to
+							<a href="/people/{!! $activity->causer->getSnakeCaseName() !!}">{{ $activity->causer->name }}</a> commented to
 							@if($activity->subject->post['user']['name'] == $profile->name)
 								@if($profile->userDetail->gender == 'Male')
 								his
@@ -102,13 +98,13 @@
 								@endif
 								own
 							@else
-							<a href="/people/{{ str_replace(" ","-",strtolower( $activity->subject->post['user']['name'] )) }}">{{ $activity->subject->post['user']['name'] }}</a>'s
+							<a href="/people/{!! $activity->subject->post->user->getSnakeCaseName() !!}">{{ $activity->subject->post->user->name }}</a>'s
 							@endif 
-							<a href="/posts/{{ $activity->subject->post['id'] }}#{{ $activity->subject->id }}">post.</a>
+							<a href="/posts/{{ $activity->subject->post->id }}#{{ $activity->subject->id }}">post.</a>
 						</p>
 						@elseif($activity->subject_type == "App\Post")
 						<p>
-							<a href="/people/{{ str_replace(" ", "-", strtolower($activity->causer->name)) }}">
+							<a href="/people/{!! $activity->causer->getSnakeCaseName() !!}">
 								{{ $activity->causer->name }}
 							</a>
 							posted in
@@ -124,7 +120,7 @@
 						
 						<div class="pb-2">
 							<div class="pb-1">
-								<a href="/posts/{{ $activity->subject->post['id'] }}">
+								<a href="/posts/{{ $activity->subject->post->id }}">
 									<span class="h6">{{ $activity->subject->post['title'] }}</span>
 								</a>
 							</div>
@@ -134,11 +130,11 @@
 							</div>
 						</div>
 							
-							@if(!empty($activity->subject->post['image']))
+							@if( $activity->subject->post->hasImage() )
 							<div class="pb-2 image-wrapper">
-									<a href="/posts/{{ $activity->subject->post['id'] }}">
-										<img src='{{ asset("storage/upload/post/".$activity->subject->post['image']) }}' class="post-image">
-									</a>
+								<a href="/posts/{{ $activity->subject->post->id }}">
+									<img src='{!! $activity->subject->post->getImagepath() !!}' class="post-image">
+								</a>
 							</div>	
 							@endif
 
@@ -165,7 +161,7 @@
 							
 							@if(!empty($activity->subject->image))
 							<div class="pb-2 image-wrapper">
-									<img src='{{ asset("storage/upload/post/".$activity->subject->image) }}' class="post-image">
+									<img src='{{ asset("uploads/post/".$activity->subject->image) }}' class="post-image">
 							</div>	
 							@endif
 							<div>
@@ -214,7 +210,7 @@
 								<div class="profile-summary">
 									<a href="#" class="user-pic float-left mr-3">
 										@if(!empty($follower->userDetail->avatar))
-										<img src='{{ asset("storage/upload/user_avatar/".$follower->userDetail->avatar) }}'>
+										<img src='{{ asset("uploads/user_avatar/".$follower->userDetail->avatar) }}'>
 										@else
 										<img src="{{ asset('images/default.png') }}">
 										@endif
@@ -259,7 +255,7 @@
 								<div class="profile-summary">
 									<a href="#" class="user-pic float-left mr-3">
 										@if(!empty($my_following->userDetail->avatar))
-										<img src='{{ asset("storage/upload/user_avatar/".$my_following->userDetail->avatar) }}'>
+										<img src='{{ asset("uploads/user_avatar/".$my_following->userDetail->avatar) }}'>
 										@else
 										<img src="{{ asset('images/default.png') }}">
 										@endif
