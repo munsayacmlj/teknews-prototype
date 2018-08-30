@@ -1,18 +1,18 @@
-$(window).on('load', function() {
-	$('.grid').masonry({
-		itemSelector: '.grid-item',
-		columnWidth: '.grid-sizer',
-		percentPosition: true,
-		gutter: 20
-	});
+// $(window).on('load', function() {
+// 	$('.grid').masonry({
+// 		itemSelector: '.grid-item',
+// 		columnWidth: '.grid-sizer',
+// 		percentPosition: true,
+// 		gutter: 20
+// 	});
 
-	$('.grid2').masonry({
-		itemSelector: '.grid-item--width2',
-		columnWidth: '.grid-sizer2',
-		percentPosition: true,
-		gutter: 30
-	});
-});
+// 	$('.grid2').masonry({
+// 		itemSelector: '.grid-item--width2',
+// 		columnWidth: '.grid-sizer2',
+// 		percentPosition: true,
+// 		gutter: 30
+// 	});
+// });
 
 var changeFollowToUnfollow = (userId, newId) => {
 	$("#f-btn-"+userId).html('<i class="fas fa-user-times"></i> Unfollow');   
