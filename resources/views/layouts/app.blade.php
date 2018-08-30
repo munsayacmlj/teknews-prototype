@@ -12,12 +12,6 @@
 
   {{-- Fontawesome --}}
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-  <style type="text/css">
-  body {
-    padding-right: 0px !important;
-  }
-</style>
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link href="{{ asset('css/alertify.min.css') }}" rel="stylesheet">

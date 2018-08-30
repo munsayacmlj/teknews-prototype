@@ -7,7 +7,7 @@
             <div class="home-banner pt-4">
                 <h1><span>Teknews</span></h1>
                 <h3>A Social Media Platform :)</h3>
-                <p style="font-size: 18px;">Currently in Development but you can use its functionality of course!</p>
+                <p>Currently in Development but you can use its functionality of course!</p>
                 <p>Sign up below</p>
                 @guest
                 <div class="mt-5">
