@@ -9925,6 +9925,14 @@ textarea {
   resize: none;
 }
 
+.home-banner p {
+  font-size: 18px;
+}
+
+.about-text p {
+  font-size: 18px;
+}
+
 .dropdown-item {
   padding: 0.2rem 0.5rem !important;
 }

@@ -52,6 +52,17 @@ textarea{
 }
 
 
+.home-banner {
+  p {
+    font-size: 18px;
+  }
+}
+
+.about-text {
+  p {
+    font-size: 18px;
+  }
+}
 
 .container-fluid {
   // height: 
@@ -61,12 +72,6 @@ textarea{
   padding: 0.2rem 0.5rem !important;
 }
 
-#app{
-  // height: 100%;
-  main{
-    // height: inherit;
-  }
-}
 
 .inline {
   display: inline-block !important;

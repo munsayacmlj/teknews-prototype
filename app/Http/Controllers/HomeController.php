@@ -2,20 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends BaseController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -24,5 +15,14 @@ class HomeController extends BaseController
     public function index()
     {
         return view('home');
+    }
+
+    public function getHomePage()
+    {
+        if (Auth::check()) {
+             $user = str_replace(" ", "-", strtolower(Auth::user()->name));
+             return view('home', compact('user'));
+         }
+         return view('home', compact('topics'));
     }
 }

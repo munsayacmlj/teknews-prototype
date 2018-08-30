@@ -10,25 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\Topic;
+// Route::get('/', function () {
+// 	if (Auth::check()) {
+// 		$user = str_replace(" ", "-", strtolower(Auth::user()->name));
+// 	    return view('home', compact('user'));
+// 	}
+// 	return view('home', compact('topics'));
+// });
 
-Route::get('/', function () {
-	$topics = Topic::all();
-	if (Auth::check()) {
-		$user = str_replace(" ", "-", strtolower(Auth::user()->name));
-	    return view('home', compact('topics', 'user'));
-	}
-	else
-	{
-		return view('home', compact('topics'));
-	}
+Route::get('/', 'HomeController@getHomePage');
 
-});
-
-Route::get('about', function() {
-	$user = str_replace(" ", "-", strtolower(Auth::user()->name));
-	return view('pages/about', compact('user'));
-})->middleware('auth');
+Route::get('about', 'AboutController@getAboutPage');
 
 Route::get('chat', 'MessageController@viewChat')->middleware('auth');
 
