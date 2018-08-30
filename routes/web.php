@@ -10,13 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', function () {
-// 	if (Auth::check()) {
-// 		$user = str_replace(" ", "-", strtolower(Auth::user()->name));
-// 	    return view('home', compact('user'));
-// 	}
-// 	return view('home', compact('topics'));
-// });
 
 Route::get('/', 'HomeController@getHomePage');
 
@@ -64,5 +57,3 @@ Route::post('people/{name}/edit', 'UserController@updateUser')->middleware('auth
 Route::post('people/{name}/activities', 'UserController@viewActivities')->middleware('auth');
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
