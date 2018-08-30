@@ -9926,61 +9926,10 @@ textarea {
 }
 
 .custom-masonry {
-  /* Masonry container */
-  -webkit-column-count: 5;
-  column-count: 5;
-  -webkit-column-gap: 1em;
-  column-gap: 1em;
-  margin: 1.5em;
-  padding: 0;
-  -webkit-column-gap: 1.5em;
-  column-gap: 1.5em;
-  -webkit-column-count: 1;
-  column-count: 1;
-}
-
-@media (min-width: 576px) {
-  .custom-masonry {
-    -webkit-column-count: 2;
-    column-count: 2;
-  }
-}
-
-@media (min-width: 768px) {
-  .custom-masonry {
-    -webkit-column-count: 3;
-    column-count: 3;
-  }
-}
-
-@media (min-width: 992px) {
-  .custom-masonry {
-    -webkit-column-count: 4;
-    column-count: 4;
-  }
-}
-
-@media (min-width: 1200px) {
-  .custom-masonry {
-    -webkit-column-count: 5;
-    column-count: 5;
-  }
-}
-
-.custom-masonry__item {
-  display: inline-block;
-  margin: 0 0 1.5em;
-  width: 100%;
-  -webkit-transition: 1s ease all;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -webkit-box-shadow: 2px 2px 4px 0 #ccc;
-          box-shadow: 2px 2px 4px 0 #ccc;
-}
-
-.custom-masonry__item img {
-  max-width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 100px;
 }
 
 .home-banner p,

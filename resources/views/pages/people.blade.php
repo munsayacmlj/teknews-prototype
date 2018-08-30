@@ -8,12 +8,12 @@
 	</section>
 	<div class="container-fluid py-4 people-wrapper">
 		<div class="row">
-			<div class="col col-sm-8">
+			<div class="col-12">
 				<div class="row">
 					@foreach($all_users as $this_user)
 					{{-- {{ $this_user->following->id }} --}}
 						@if ($this_user->name != Auth::user()->name)
-							<div class="clearfix col-md-6">
+							<div class="clearfix col col-sm-3 col-md-4">
 								<div class="card mb-4 inner-card">
 									<div class="card-header cleafix py-3">
 										<div class="float-right u-f-btn" id="u-f-btn-{{ $this_user->id }}">
@@ -44,11 +44,7 @@
 							</div> {{--  --}}
 						@endif
 					@endforeach
-				</div>
-			</div>
-
-			<div class="col col-sm-4">
-				
+				</div> {{-- row --}}
 			</div>
 		</div>
 	</div>
