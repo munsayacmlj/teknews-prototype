@@ -4,7 +4,7 @@
 
 <div class="wrapper px-3">
 	<div class="container-fluid post-preview pt-2 my-4" style="background-color: transparent;">
-		<div class="row px-3">
+		<div class="row px-md-3">
 			<div class="col-12 col-md-8 col-lg-9">		
 				<div class="row py-3 mb-4" style="background-color: #fff;">
 								
@@ -100,7 +100,7 @@
 					</div>
 
 					<div class="add-comment-footer form-group py-3 px-2">
-						<textarea name="comment" id="comment-area-{{ $post->id }}" class="form-control" rows="7" placeholder="Say Something..."></textarea>
+						<textarea name="comment" id="comment-area-{{ $post->id }}" class="form-control" rows="7" placeholder="Say Something..." maxlength="191"></textarea>
 						<button type="button" data-id="{{ $post->id }}" data-user="{{ Auth::user()->name }}" class="btn btn-primary form-control mt-4 comment-btn">Comment</button>
 					</div>
 				</div>

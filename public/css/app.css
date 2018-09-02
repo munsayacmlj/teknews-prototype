@@ -10262,6 +10262,12 @@ textarea {
   display: none;
 }
 
+@media (min-width: 768px) {
+  .post-preview .comment-wrapper .comment-body .comment .edit-area {
+    margin-left: 60px;
+  }
+}
+
 .post-preview .comment-wrapper .comment-body .comment .comment-input {
   border-radius: 4px;
 }

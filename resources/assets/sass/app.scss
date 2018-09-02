@@ -404,6 +404,9 @@ textarea{
         
         .edit-area{
           display:none;
+          @include media-breakpoint-up(md) {
+            margin-left: 60px;
+          }
         }
         .comment-input{
           // display:none;

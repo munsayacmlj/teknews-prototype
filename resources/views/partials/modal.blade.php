@@ -27,7 +27,7 @@
 
           <div class="text form-group">
             <label>Text</label>
-            <textarea rows="7" class="form-control" placeholder="Say Something..." name="content"></textarea>
+            <textarea rows="7" class="form-control" placeholder="Say Something..." name="content" maxlength="191"></textarea>
           </div>
 
           <div class="row">
