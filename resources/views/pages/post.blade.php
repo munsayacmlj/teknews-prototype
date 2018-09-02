@@ -5,10 +5,10 @@
 <div class="wrapper px-3">
 	<div class="container-fluid post-preview pt-2 my-4" style="background-color: transparent;">
 		<div class="row px-3">
-			<div class="col col-sm-12 col-md-8 col-lg-9">		
+			<div class="col-12 col-md-8 col-lg-9">		
 				<div class="row py-3 mb-4" style="background-color: #fff;">
 								
-					<div class="col col-md-6">
+					<div class="col-12 col-md-6">
 						<div class="first-row">
 							<span><i class="fas fa-tag"></i> 
 								<a href="/posts/?topic={{ strtolower($post->topic->topic) }}"> {{ $post->topic->topic }}
@@ -44,7 +44,7 @@
 					</div>
 					
 					@if ( $post->hasImage() )
-					<div class="col col-sm-12 col-md-6 mt-5">
+					<div class="col-12 col-md-6 mt-5">
 						<div class="post-image">
 							<img src='{!! $post->getImagepath() !!}'>
 						</div>
@@ -93,7 +93,7 @@
 			</div> {{-- col-md-8 --}}
 
 
-			<div class="col col-md-4 col-lg-3 side-bar">
+			<div class="col-12 col-md-4 col-lg-3 side-bar">
 				<div class="add-comment-section pt-2" style="background-color: #fff;">
 					<div class="first-row py-2">
 						<span class="pl-4">Community Response</span>
