@@ -12,6 +12,7 @@
 
   {{-- Fontawesome --}}
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link href="{{ asset('css/alertify.min.css') }}" rel="stylesheet">
@@ -88,11 +89,13 @@
     </main>
   </div>
   <!-- Scripts -->
+  {{-- ajaxForm --}}
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/alertify.min.js') }}"></script>
   <script src="{{ asset('js/jquery.blockUI.js') }}"></script>
   <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/masonry.pkgd.js') }}"></script>
+  <script type="text/javascript" src="http://malsup.github.io/jquery.form.js"></script>
   <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

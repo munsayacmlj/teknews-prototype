@@ -10,8 +10,11 @@
       <div class="modal-body">
         {{-- if user has logged in --}}
         @auth
-        <form action="/posts" method="POST" enctype="multipart/form-data">
+        <form id="modalForm" action="/posts" method="POST" enctype="multipart/form-data">
           {{ csrf_field() }}
+          
+          <input type="hidden" value="{{ Auth::user()->getSnakeCaseName() }}" id="authUserName">
+
           <div class="topic form-group w-75">
             <label>Topic</label>
             <select class="form-control" name="topic_id">
@@ -23,12 +26,12 @@
 
           <div class="title form-group">
             <label>Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Title..." required>
+            <input type="text" name="title" class="form-control new-post-title" placeholder="Title..." required>
           </div>
 
           <div class="text form-group">
             <label>Text</label>
-            <textarea rows="7" class="form-control" placeholder="Say Something..." name="content" maxlength="191"></textarea>
+            <textarea rows="7" class="form-control" placeholder="Say Something..." name="content" maxlength="500"></textarea>
           </div>
 
           <div class="row">

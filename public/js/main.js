@@ -475,6 +475,15 @@ $(document).ready(function() {
 		
 	});
 
-	
+	$('#modalForm').ajaxForm(function() {		
+		$('#postModal').modal('toggle');
+		const new_title = $('.new-post-title').val();
 
+		const $item = $('<div class="card grid-sizer grid-item bg-light mb-3">');
+				$item.append(new_title).append('</div>');
+
+
+		const $grid_container = $('.grid');
+		$grid_container.prepend( $item ).masonry( 'prepended', $item );
+	});
 });
