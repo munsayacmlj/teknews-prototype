@@ -1,31 +1,20 @@
-function resizeGridItem(item){
-   grid = document.getElementsByClassName("custom-masonry")[0];
-   rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-   rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
-   rowSpan = Math.ceil((item.querySelector('.custom-masonry__content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
-   item.style.gridRowEnd = "span "+rowSpan;
-   console.log(item.querySelector('.custom-masonry__content').getBoundingClientRect().height);
-}
+$(document).ready( function () {
+	var $boxes = $('.grid-item');
+	$boxes.hide();
 
-function resizeAllGridItems(){
-   allItems = document.getElementsByClassName("custom-masonry-item");
-   for(x=0;x<allItems.length;x++){
-      resizeGridItem(allItems[x]);
-   }
-}
+	var $container = $('.grid');
+	$container.imagesLoaded( function() {
+		$boxes.fadeIn();
 
-window.onload = resizeAllGridItems();
-window.addEventListener = ("resize", resizeAllGridItems);
+		$container.masonry( {
+			itemSelector: '.grid-item',
+			columnWidth: '.grid-sizer',
+			percentPosition: true,
+			gutter: 15,
+		} );
+	} );
 
-allItems = document.getElementsByClassName("custom-masonry-item");
-for(x=0;x<allItems.length;x++){
-   imagesLoaded( allItems[x], resizeInstance);
-}
-
-function resizeInstance(instance){
-   item = instance.elements[0];
-   resizeGridItem(item);
-}
+} );
 
 var changeFollowToUnfollow = (userId, newId) => {
 	$("#f-btn-"+userId).html('<i class="fas fa-user-times"></i> Unfollow');   

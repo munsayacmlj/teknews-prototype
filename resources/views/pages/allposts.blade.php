@@ -29,10 +29,9 @@
       </div>
     </nav>
     {!! $posts->appends($_GET)->links() !!}
-      <div class="custom-masonry">
+      <div class="grid pt-4 mt-3" id="postsArea">
         @foreach ($posts as $post)
-        <div class="custom-masonry-item">
-          <div class="card custom-masonry__content bg-light mb-3" id="card_{{ $post->id }}">
+          <div class="card grid-sizer grid-item bg-light mb-3" id="card_{{ $post->id }}">
             <div class="card-header clearfix">
               <a href="/people/{{ str_replace(" ", "-", strtolower($post->user->name)) }}" class="float-left">
                 <img src="{!! $post->user->getPhotoPath() !!}" class="user-pic">          
@@ -88,7 +87,6 @@
               </div>
             </div>    
           </div> {{-- card --}}
-        </div> {{-- masonry-item --}}
         @endforeach
       </div>
 	</div>
