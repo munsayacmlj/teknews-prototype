@@ -4,11 +4,11 @@
 
 <div class="container user-page pt-5 pb-4 mt-4">
 	<div class="row px-2">
-		<div class="col col-sm-4 col-md-3 center">
+		<div class="col-12 col-sm-4 col-md-3 center">
 			<img src="{!! $profile->getPhotoPath() !!}">
 		</div>
 		
-		<div class="col col-sm-8 col-md-5 profile-details">
+		<div class="col-12 col-sm-8 col-md-5 profile-details">
 			<h1>{{ $profile->name }}</h1>
 			<p>{{ $profile->userDetail->bio }}</p>
 			@if ( $profile->name != Auth::user()->name )
@@ -20,37 +20,41 @@
 			@endif
 		</div>
 
-		<div class="d-sm-none d-md-block col col-md-2">
-			@if (!empty($profile->userDetail->age))
-			<div class="user-age pt-4">
-				<label><strong>Age:</strong></label>
-				<span>{{ $profile->userDetail->age }}</span>
+		<div class="col-12 col-md-2 mt-4 mt-md-0">
+			<div class="row">
+				@if (!empty($profile->userDetail->age))
+				<div class="col-3 col-md-12 user-age pt-md-4">
+					<label><strong>Age:</strong></label>
+					<span>{{ $profile->userDetail->age }}</span>
+				</div>
+				@endif
+				@if (!empty($profile->userDetail->location))
+				<div class="col-9 col-md-12 user-location pt-md-2">
+					<i class="fas fa-map-marker"></i><span> {{ $profile->userDetail->location }}</span>
+				</div>
+				@endif
 			</div>
-			@endif
-			@if (!empty($profile->userDetail->location))
-			<div class="user-location pt-2">
-				<i class="fas fa-map-marker"></i><span> {{ $profile->userDetail->location }}</span>
-			</div>
-			@endif
 		</div>
 
-		<div class="d-sm-none d-md-block col col-md-2">
-			<div class="user-follower pt-2">
-				<h2>
-					<a class="nav-item" href="#!">{{ $profile->followers->count() }}
-					</a>
-				</h2>
-				<label>Followers</label>
-			</div>
+		<div class="col-12 col-md-2">
+			<div class="row">
+				<div class="col-3 col-md-12 user-follower pt-md-2">
+					<h2>
+						<a class="nav-item" href="#!">{{ $profile->followers->count() }}
+						</a>
+					</h2>
+					<label>Followers</label>
+				</div>
 
-			<div class="user-following pt-1">
-				<h2>
-					<a class="nav-item" href="#!">
-						{{ $profile->following->count() }}
-					</a>
-				</h2>
-				<label>Following</label>
-			</div>
+				<div class="col-9 col-md-12 user-following pt-md-1">
+					<h2>
+						<a class="nav-item" href="#!">
+							{{ $profile->following->count() }}
+						</a>
+					</h2>
+					<label>Following</label>
+				</div>
+			</div> {{-- row --}}
 		</div>
 	</div>
 	
