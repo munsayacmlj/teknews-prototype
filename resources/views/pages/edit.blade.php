@@ -15,7 +15,9 @@
 				<div class="header-edit row">
 					<span class="col col-md-6 lead pl-3">Edit Post</span>
 					<div class="col col-md-6 lead pl-3">
-						<span class="float-right h6 py-1 px-2 del-btn"><i class="far fa-trash-alt"></i> Delete</span>
+						<a class="float-right h6 py-1 px-2 delete-post-from-post-page del-btn" data-id="{{ $post->id }}">
+							<i class="far fa-trash-alt"></i> Delete
+						</a>
 					</div>
 				</div>
 

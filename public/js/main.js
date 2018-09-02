@@ -104,7 +104,11 @@ $(document).ready(function() {
 				},
 				success:function(data) {
 					$.unblockUI();
-					$('#card_'+postId).remove();
+					const element = $('#card_'+postId);
+					const container = $('.grid');
+					container.masonry('remove', element)
+						// layout remaining item elements
+						.masonry('layout'); 
 				}
 			});
 
@@ -113,6 +117,33 @@ $(document).ready(function() {
 		});
 	});
 
+	$('.delete-post-from-post-page').click( function() {
+		let postId = $(this).data('id');
+
+		alertify.confirm('Delete Post', 'Are you sure you want to delete this post?', function() {
+			
+			$.ajax({
+				headers: {
+	          		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	          	},
+				url: '/posts/' + postId + '/delete',
+				type: 'POST',
+				data: {
+					
+				},
+				beforeSend:function() {
+					$.blockUI();
+				},
+				success:function(data) {
+					$.unblockUI();
+					window.location.replace("/posts");
+				}
+			});
+
+		}, function() {
+
+		});
+	} );
 
 	$(".comment-btn").click(function () {
 		let postId = $(this).data('id');
