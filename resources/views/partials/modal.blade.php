@@ -8,6 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
+        {{-- if user has logged in --}}
         @auth
         <form action="/posts" method="POST" enctype="multipart/form-data">
           {{ csrf_field() }}
@@ -49,7 +50,7 @@
           </div>
         </div>
         <div class="mt-3">
-          <button type="submit" class="btn btn-primary float-right">Save changes</button>
+          <button type="submit" class="btn btn-primary float-right">Post</button>
         </div>
       </form>
       @else

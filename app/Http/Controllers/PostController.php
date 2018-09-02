@@ -63,7 +63,7 @@ class PostController extends BaseController
   public function savePost(Request $request) {
     $post = new Post;
     $post->title = $request->title;
-    $post->content = $request->content;
+    $post->content = $request->content ? $request->content : '';
     $post->video = '';
     $post->user_id = Auth::user()->id;
     $post->topic_id = $request->topic_id;
