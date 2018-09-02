@@ -10006,6 +10006,10 @@ textarea {
   max-width: 1980px;
 }
 
+.grid2 {
+  max-width: 1920px;
+}
+
 .grid:after {
   content: '';
   display: block;
@@ -10043,6 +10047,41 @@ textarea {
 @media (min-width: 1200px) {
   .grid-sizer,
   .grid-item {
+    width: 19%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .grid-sizer2,
+  .grid-item--width2 {
+    width: 100%;
+  }
+}
+
+@media (min-width: 576px) {
+  .grid-sizer2,
+  .grid-item--width2 {
+    width: 48%;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-sizer2,
+  .grid-item--width2 {
+    width: 31%;
+  }
+}
+
+@media (min-width: 992px) {
+  .grid-sizer2,
+  .grid-item--width2 {
+    width: 22%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid-sizer2,
+  .grid-item--width2 {
     width: 19%;
   }
 }
@@ -10358,7 +10397,7 @@ textarea {
 }
 
 #user-activity .activity-list .second-column .image-wrapper .post-image {
-  max-width: 250px;
+  width: 100%;
   height: auto;
 }
 

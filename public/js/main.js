@@ -1,19 +1,48 @@
+// $(window).on('load', function() {
+// 	var $grid = $('.grid').masonry({
+// 		itemSelector: '.grid-item',
+// 		columnWidth: '.grid-sizer',
+// 		percentPosition: true,
+// 		gutter: 20
+// 	});
+ 	
+//  	$grid.imagesLoaded().progress( function () {
+//  		$grid.masonry('layout');
+//  	} );
+// });
+
 $(document).ready( function () {
-	var $boxes = $('.grid-item');
-	$boxes.hide();
+	const boxes = $('.grid-item');
+	boxes.hide();
 
-	var $container = $('.grid');
-	$container.imagesLoaded( function() {
-		$boxes.fadeIn();
+	const container = $('.grid');
+	container.imagesLoaded( function() {
+		
+		boxes.fadeIn();
 
-		$container.masonry( {
+		container.masonry( {
 			itemSelector: '.grid-item',
 			columnWidth: '.grid-sizer',
 			percentPosition: true,
 			gutter: 15,
 		} );
+
 	} );
 
+	const activity_boxes = $('.grid-item--width2');
+	activity_boxes.hide();
+
+	const activity_container = $('.grid2');
+	activity_boxes.imagesLoaded( function() {
+		activity_boxes.fadeIn();
+
+		activity_container.masonry( {
+			itemSelector: '.grid-item--width2',
+			columnWidth: '.grid-sizer2',
+			percentPosition: true,
+			gutter: 10,
+		} );
+	} );
 } );
 
 var changeFollowToUnfollow = (userId, newId) => {

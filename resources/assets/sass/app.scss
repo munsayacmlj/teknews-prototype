@@ -145,6 +145,10 @@ textarea{
   max-width: 1980px
 }
 
+.grid2 {
+  max-width: 1920px;
+}
+
 .grid:after {
   content: '';
   display: block;
@@ -175,6 +179,29 @@ textarea{
   }
 }
 
+.grid-sizer2,
+.grid-item--width2 { 
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  } 
+
+  @include media-breakpoint-up(sm) {
+    width: 48%;
+  }
+
+  @include media-breakpoint-up(md) {
+    width: 31%;
+  }
+  
+  @include media-breakpoint-up(lg) {
+    width: 22%;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 19%;
+  }
+}
 
 
 // .outer-card{
@@ -558,7 +585,7 @@ textarea{
       .image-wrapper{
         width: 100%;
         .post-image{
-          max-width: 250px;
+          width: 100%;
           height: auto;
         }
       }
