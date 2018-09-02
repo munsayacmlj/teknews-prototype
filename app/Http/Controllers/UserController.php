@@ -46,7 +46,7 @@ class UserController extends BaseController
      * Get all the user's activities
      *
      */
-    $activities = Activity::where('causer_id', $profile->id)->get();
+    $activities = Activity::where('causer_id', $profile->id)->where('description', 'created')->get();
     return view('/pages/person', compact('profile', 'user', 'origName', 'activities'))->with('following', $following);
   }
 
